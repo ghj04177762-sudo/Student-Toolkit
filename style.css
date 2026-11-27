@@ -1,0 +1,364 @@
+/* 애플 시스템 디자인 토큰 */
+:root {
+  --bg-page: #f5f5f7;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-subtle: #f2f2f7;
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-tertiary: #86868b;
+  --accent-blue: #0071e3;
+  --accent-blue-hover: #0077ed;
+  --accent-red: #ff3b30;
+  --accent-green: #34c759;
+  --border-light: rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 12px 32px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  --radius-card: 22px;
+  --radius-input: 12px;
+  --radius-btn: 980px; /* 애플 특유의 Pill 형태 버튼 */
+  --transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "SF Pro Display", "Apple SD Gothic Neo", sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 글래스모피즘 상단 헤더 */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(245, 245, 247, 0.78);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--border-light);
+  padding: 18px 24px;
+}
+
+.nav-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.brand h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* 메인 컨테이너 및 벤토 그리드 */
+.container {
+  max-width: 1240px;
+  margin: 32px auto 60px;
+  padding: 0 24px;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 24px;
+}
+
+/* 카드 스타일 */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.icon-badge.blue { background: rgba(0, 113, 227, 0.12); }
+.icon-badge.red { background: rgba(255, 59, 48, 0.12); }
+.icon-badge.purple { background: rgba(175, 82, 222, 0.12); }
+.icon-badge.green { background: rgba(52, 199, 89, 0.12); }
+.icon-badge.orange { background: rgba(255, 149, 0, 0.12); }
+.icon-badge.indigo { background: rgba(88, 86, 214, 0.12); }
+.icon-badge.teal { background: rgba(48, 176, 199, 0.12); }
+.icon-badge.pink { background: rgba(255, 45, 85, 0.12); }
+
+.card-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-bottom: 2px;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+/* 공통 폼 요소 */
+textarea,
+.apple-input,
+.apple-select {
+  width: 100%;
+  background-color: var(--bg-subtle);
+  border: 1px solid transparent;
+  border-radius: var(--radius-input);
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  transition: var(--transition);
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 92px;
+}
+
+textarea:focus,
+.apple-input:focus,
+.apple-select:focus {
+  background-color: #ffffff;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.14);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group.inline {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-group.inline .apple-select {
+  width: 60%;
+}
+
+.input-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.two-col-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* 커스텀 애플 스타일 체크박스 */
+.apple-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  user-select: none;
+}
+
+.apple-checkbox input {
+  accent-color: var(--accent-blue);
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+}
+
+/* 라디오 버튼 (Segmented Control 느낌) */
+.radio-group {
+  display: flex;
+  background: var(--bg-subtle);
+  padding: 4px;
+  border-radius: 12px;
+  gap: 4px;
+}
+
+.radio-pill {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+}
+
+.radio-pill input {
+  display: none;
+}
+
+.radio-pill span {
+  display: block;
+  padding: 7px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-radius: 9px;
+  transition: var(--transition);
+}
+
+.radio-pill input:checked + span {
+  background: #ffffff;
+  color: var(--text-primary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* 버튼 스타일 */
+.control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.control-row.right {
+  justify-content: flex-end;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn {
+  border: none;
+  border-radius: var(--radius-btn);
+  padding: 9px 18px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-primary {
+  background-color: var(--accent-blue);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-blue-hover);
+}
+
+.btn-secondary {
+  background-color: #e8e8ed;
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: #dcdce2;
+}
+
+.btn-danger {
+  background-color: rgba(255, 59, 48, 0.12);
+  color: var(--accent-red);
+}
+
+.btn-danger:hover {
+  background-color: rgba(255, 59, 48, 0.2);
+}
+
+/* 결과 출력 영역 */
+.result-box {
+  margin-top: auto;
+  background: var(--bg-subtle);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.result-box.column {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.result-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+.result-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  letter-spacing: -0.02em;
+}
+
+.result-value.highlight-red {
+  color: var(--accent-red);
+}
+
+.result-text {
+  font-size: 13px;
+  font-weight: 500;
